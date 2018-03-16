@@ -1,12 +1,8 @@
 
 module Sounds where
-{-# LANGUAGE TemplateHaskell #-}
 
-import Graphics.UI.SDL.General as SDL
 import Control.Monad 
-import Control.Concurrent.Async
 import Control.Applicative
-import Control.Concurrent
 import Sound.ALUT
 
 

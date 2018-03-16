@@ -4,20 +4,20 @@ import Graphics.Gloss.Data.Picture
 import Graphics.Gloss.Data.Display
 import World
 import Sounds
-import Control.Concurrent.Async
 import Sound.ALUT
-import Control.Parallel 
-import Control.Concurrent
-main = withProgNameAndArgs runALUT $ \progName args -> do run
+
+
+
+main = withProgNameAndArgs runALUT $ \progName args -> do run --intitialize any state that needs be
              where run =         
                         playIO 
-                        (InWindow "test" (1000,1000) (100,100) )
-                        (makeColorI 255 255 255 255)
-                        30
-                        myWorld
-                        (\w ->( return blank))
-                        events
-                        (\tm w -> return w) 
+                        (InWindow "test" (1000,1000) (100,100) ) -- Display
+                        (makeColorI 255 255 255 255)             -- Default Color (White)
+                        30                                       -- Frames per second
+                        myWorld                                  -- initial world state
+                        (\w ->( return blank))                   -- project/render world into IO
+                        events                                   -- handle world state in regards to events
+                        (\tm w -> return w)                      -- handle world state in regards to time
                         where 
                            myWorld = World.World { val = 0 }
                            events (EventMotion _) w = return w
