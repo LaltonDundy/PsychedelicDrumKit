@@ -5,6 +5,9 @@ import Graphics.Gloss.Data.Display
 import World
 import Sounds
 import Sound.ALUT
+import Control.Monad
+import Events
+
 
 
 main = withProgNameAndArgs runALUT $ \progName args -> do run --intitialize any state that needs be
@@ -19,13 +22,12 @@ main = withProgNameAndArgs runALUT $ \progName args -> do run --intitialize any 
                         events                                   -- handle world state in regards to events
                         (\tm w -> return w)                      -- handle world state in regards to time
                         where 
-                           myWorld = World.World { kick = False }
 
-                           events (EventMotion _) w = return w
-                           events (EventResize _) w = return w
-                           events (EventKey k s _ _) w
-                               | k == (Char 'w') && (s == Down)     = do playKick  
-                                                                         return w{kick = True}
-                               |otherwise                          = return w{kick = False}
-        
-          
+
+                           myWorld = World.World { 
+                                        state = First $ World.Play {kick = False},
+                                        isPaused = False
+                                                 }
+
+
+         

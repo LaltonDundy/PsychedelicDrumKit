@@ -4,16 +4,37 @@ import Graphics.Gloss.Data.Color
 import Graphics.Gloss.Data.Picture
 import Graphics.Gloss.Data.Display
 
+
+data Pause  = Pause  {
+              resumePressed :: Bool
+                     } deriving (Show, Eq) 
+
+
+data Play = Play {
+               kick :: Bool
+                       } deriving (Show, Eq) 
+
+
+data GameState = First Play | Second Pause  deriving (Show, Eq) 
+
+
+
 data World = World {
 
-    kick :: Bool
+    isPaused :: Bool, 
+
+    state :: GameState
 
     } deriving (Show, Eq) 
 
 
 render :: World -> IO Picture
+render w =
+    case (state w) of
+        
+        First s     -> if (not.kick $ s) then return blank
+                       else return (Circle 50.0)
 
-render w = if (not.kick $ w) then return Blank
-           else return (circle 150.0)
+        Second s    -> return blank 
 
  
