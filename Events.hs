@@ -12,22 +12,27 @@ import Control.Applicative
 events (EventMotion _) w = return w
 events (EventResize _) w = return w
 
-events (EventKey k s _ _) w
-   | k == (Char 'p')                     = return w {
-                                              isPaused = True,
-                                              state = Second $ World.Pause {resumePressed = False}       
-                                                    }
+events (EventKey k s _ _) w = 
+
+    case (state w) of
+    
+    First  _ ->  keyBoard k
+               where keyBoard v 
+                       | v == (Char 'p')                     = return w {
+                                                                  isPaused = True,
+                                                                  state = Second $ World.Pause {resumePressed = False}       
+                                                                        }
 
 
-   | k == (Char 'w') && (s == Down)     = if  (not.isPaused $ w ) then 
-                                              (playKick *> 
-                                               return w {
-                                               state = First $  World.Play {kick = True}
-                                                         } ) 
-                                          else return w
+                       | v == (Char 'w')                    = if  (s == Down) && (not.isPaused $ w ) then 
+                                                                  (playKick *> 
+                                                                   return w {
+                                                                   state = First $  World.Play {kick = True}
+                                                                             } ) 
+                                                              else return w { state = First $ World.Play {kick = False} } 
 
-    |otherwise                            = return w {
-                                                   state = First $  World.Play {kick = False}
-                                                     }
+                       |otherwise                            = return w 
 
+    Second _ -> return w
+                                                     
 
