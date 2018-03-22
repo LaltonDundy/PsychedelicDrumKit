@@ -3,6 +3,7 @@ module World where
 import Graphics.Gloss.Data.Color
 import Graphics.Gloss.Data.Picture
 import Graphics.Gloss.Data.Display
+import Objects
 
 
 data Pause  = Pause  {
@@ -35,6 +36,6 @@ render w =
         First s     -> if (not.kick $ s) then return blank
                        else return (Circle 50.0)
 
-        Second s    -> return blank 
+        Second s    -> return pauseButton 
 
  
