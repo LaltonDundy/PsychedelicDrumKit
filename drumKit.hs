@@ -25,7 +25,8 @@ main = withProgNameAndArgs runALUT $ \progName args -> do run --intitialize any 
 
 
                            myWorld = World.World { 
-                                        state = First $ World.Play {kick = False},
+                                        state = First $ World.Play {kick  = False,
+                                                                    snare = False},
                                         isPaused = False
                                                  }
 
