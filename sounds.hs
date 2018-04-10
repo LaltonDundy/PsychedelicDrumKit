@@ -10,4 +10,10 @@ playSound file =  do buf <- createBuffer (File file);
                      play [source];
                        
                      
-playKick =  playSound "./Bass-Drum-1.wav"
+playKick 
+     =  playSound "./wavFiles/Bass-Drum-1.wav"
+
+playSnare
+     =  playSound "./wavFiles/metal-sd.wav"
+
+ 
