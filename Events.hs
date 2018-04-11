@@ -19,6 +19,7 @@ events (EventKey k s _ _) w =
     First  p ->  keyBoard k
                where keyBoard v 
 
+                       --Pause the app when 'p' is pressed
                        | v == (Char 'p')  = 
 
                           return w {
@@ -26,17 +27,18 @@ events (EventKey k s _ _) w =
                              state    = Second $ World.Pause {resumePressed = False}       
                                     }
 
-
+                       --Play Kick sound and change state when 'w' is pressed
                        | v == (Char 'w') =
 
                             if  (s == Down) then (
                                playKick *> return w  {
                                state = First $ p { kick = True } 
                                                       }                 ) 
-
+                        --Return back to normal state when button is lifted
                             else return w { state = First $ p { kick = False } }
 
 
+                       --Play Snare sound and change state when 'd' is pressed
                        | v == (Char 'd') =
 
                             if  (s == Down) then (
@@ -44,6 +46,7 @@ events (EventKey k s _ _) w =
                                state = First $ p { snare = True }
                                                       }                 ) 
 
+                        --Return back to normal state when button is lifted
                             else return w { state = First $ p {snare = False}}
 
 
