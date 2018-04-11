@@ -7,6 +7,7 @@ import Graphics.Gloss.Data.Display
 import Objects
 
 
+--Pause State
 data Pause  = Pause  {
 
      resumePressed :: Bool
@@ -14,6 +15,7 @@ data Pause  = Pause  {
      } deriving (Show, Eq) 
 
 
+--Playing Drum state
 data Play = Play {
 
      kick  :: Bool,
@@ -21,6 +23,7 @@ data Play = Play {
      snare :: Bool
 
      } deriving (Show, Eq) 
+
 
 
 data GameState =
@@ -46,6 +49,7 @@ render w =
         Second s    -> return pauseButton 
 
 
+-- return Picture composed other pictures based on state
      where display p  =
 
             let pics =
