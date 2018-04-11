@@ -13,7 +13,7 @@ pauseButton =
 
 pepe :: IO [Picture]
 pepe = 
-  fmap (\x -> [x]) $  loadBMP "./BMPfiles/-pepe-frog-clipart-1280_720.bmp" 
+  fmap (\x -> [x]) $  loadBMP "./BMPfiles/clip.bmp" 
 
 
 
